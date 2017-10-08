@@ -18,3 +18,7 @@ java8examples -> Proyecto maven con clases con método main ejecutables. Tendrem
   - Funciones de Alto Orden
   - RxJava
   - Nashorn
+
+java8-CompletableFuture -> Proyecto maven con un breve ejemplo de utilización de Future en Java8 con la nueva clase CompletableFuture.
+
+java8-Predicate-Example -> Proyecto maven con un breve ejemplo de utilizacin de Predicate de java8 para utilización en filtros de stream de una lista dada.
