@@ -272,7 +272,7 @@ public class CompletableFutureTest {
 		        , executor);
 	}
 	
-	@Test
+	@Ignore
 	public void testRunFutureExceptions() throws Exception{
 		// runAfterBoth
 		CompletableFuture<Void> future1b = CompletableFuture.runAsync(() -> {
@@ -299,6 +299,38 @@ public class CompletableFutureTest {
 			if(e != null) LOGGER.error("ERROR en futuro: ", e);
 			else System.out.println(s);
 		}, executor);
+	}
+	
+	@Test
+	public void TestAllOfCompletableFuture(){
+		// allOf
+		CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
+		    LOGGER.info("Comenzando future1 for allOf...");
+		    Sleep.sleepSeconds(2);
+		    LOGGER.info("Terminado future1 for allOf!");
+		    return "Terminado future1";
+		}, executor);
+		 
+		CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> {
+		    LOGGER.info("Comenzando future2 for allOf...");
+		    Sleep.sleepSeconds(1);
+		    LOGGER.info("Terminado future2 for allOf!");
+		    return "Terminado future2";
+		}, executor);
+		 
+		CompletableFuture<String> future3 = CompletableFuture.supplyAsync(() -> {
+		    LOGGER.info("Comenzando future3 for allOf...");
+		    Sleep.sleepSeconds(3);
+		    LOGGER.info("Terminado future3 for allOf!");
+		    return "Terminado future3";
+		}, executor);
+		 
+		CompletableFuture<Void> all = CompletableFuture.allOf(future1, future2, future3);
+		 
+		all.whenCompleteAsync((s, e) ->{
+			//s -- Será null allOf no retorna valor.
+			LOGGER.info("Resultado all: {}", s);
+		}, executor);	
 	}
 }
 
