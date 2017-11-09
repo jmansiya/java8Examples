@@ -4,4 +4,19 @@
   <artifactId>PredicateExample</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <description>Ejemplo de utilización del objeto Predicate en Java8</description>
+  <properties>
+  	<java.version>1.8</java.version>
+  </properties>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.apache.commons</groupId>
+  		<artifactId>commons-lang3</artifactId>
+  		<version>3.6</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.hamcrest</groupId>
+  		<artifactId>hamcrest-all</artifactId>
+  		<version>1.3</version>
+  	</dependency>
+  </dependencies>
 </project>
