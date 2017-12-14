@@ -24,7 +24,7 @@ public class TestUserValidation {
         nombresBusqueda = new ArrayList<>();
         nombresBusqueda.add("Juan");
         nombresBusqueda.add("Jose");
-        nombresBusqueda.add("Luis");
+        nombresBusqueda.add("Luis Maria");
         nombresBusqueda.add("Antonio");
     }
 
