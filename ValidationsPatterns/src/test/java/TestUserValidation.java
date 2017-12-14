@@ -49,6 +49,8 @@ public class TestUserValidation {
         final UserValidation validacion = UserValidation.emailIsNotNull().add(UserValidation.emailFormatoCorrecto());
 
         assertThat(validacion.apply(usuario, null), is(true));
+
+        //Pruebas git
     }
 
 
