@@ -50,7 +50,6 @@ public class TestUserValidation {
 
         assertThat(validacion.apply(usuario, null), is(true));
 
-        //Pruebas git
     }
 
 
