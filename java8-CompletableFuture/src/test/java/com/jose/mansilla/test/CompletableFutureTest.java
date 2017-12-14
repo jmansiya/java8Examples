@@ -330,7 +330,8 @@ public class CompletableFutureTest {
 		all.whenCompleteAsync((s, e) ->{
 			//s -- Será null allOf no retorna valor.
 			LOGGER.info("Resultado all: {}", s);
-		}, executor);	
+		}, executor);
+		//Prebas intellij
 	}
 }
 
