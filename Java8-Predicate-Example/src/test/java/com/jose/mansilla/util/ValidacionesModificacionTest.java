@@ -26,6 +26,7 @@ public class ValidacionesModificacionTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		//Pruebas git
 	}
 
 	@Before
