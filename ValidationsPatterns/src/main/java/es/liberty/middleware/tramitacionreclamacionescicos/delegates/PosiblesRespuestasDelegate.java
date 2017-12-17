@@ -6,28 +6,32 @@ import es.liberty.middleware.tramitacionreclamacionescicos.model.reclamacionesci
 import es.liberty.middleware.tramitacionreclamacionescicos.model.reclamacionescicos.ReclamacionCicos;
 import es.liberty.middleware.tramitacionreclamacionescicos.model.reclamacionescicos.UltimoMensajeCICODIA;
 import es.liberty.middleware.tramitacionreclamacionescicos.model.reclamacionescicos.validations.model.PreCondicionesPosiblesRespuestasModel;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertNotNull;
 
-@Component
+
 public class PosiblesRespuestasDelegate {
+    /*
+    Este método lo voy a comentar únicamente para probar el método get MensajeCICODIAEntrada
+
     public List<Mensaje> getPosiblesMensajeDeRepuesta(String idReclamacion){
         List<Mensaje> mensajesPosibleRepuesta = new ArrayList<>();
         
         return null;
     }
+    */
+    public UltimoMensajeCICODIA getMensajeCICODIAEntrada(final PreCondicionesPosiblesRespuestasModel preCondiciones, final ReclamacionCicos reclamacion){
+        List<PreCondicionesPosiblesRespuestas> existePosibleRespuesta = Stream.of(PreCondicionesPosiblesRespuestas.values()).filter(e -> e.getCondition().test(preCondiciones)).collect(Collectors.toList());
 
-    private UltimoMensajeCICODIA getMensajeCICODIAEntrada(final PreCondicionesPosiblesRespuestasModel preCondiciones, final ReclamacionCicos reclamacion){
-        Optional<PreCondicionesPosiblesRespuestas> existePosibleRespuesta = Stream.of(PreCondicionesPosiblesRespuestas.values()).filter(e -> e.getCondition().test(preCondiciones)).findFirst();
-
-        if (existePosibleRespuesta.isPresent()){
-            return existePosibleRespuesta.get().getObtenerDatosConsultaPosiblesRespuestas().apply(reclamacion);
+        if(existePosibleRespuesta != null && existePosibleRespuesta.size() == 1){
+            return existePosibleRespuesta.get(0).getObtenerDatosConsultaPosiblesRespuestas().apply(reclamacion);
+        } else {
+            System.out.println("Error se cumplen mas de una condición.");
         }
 
         return null;

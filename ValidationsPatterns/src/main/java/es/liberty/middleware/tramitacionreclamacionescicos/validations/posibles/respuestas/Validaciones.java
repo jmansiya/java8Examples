@@ -3,6 +3,7 @@ package es.liberty.middleware.tramitacionreclamacionescicos.validations.posibles
 import es.liberty.middleware.tramitacionreclamacionescicos.model.enums.DireccionMensajeEnum;
 import es.liberty.middleware.tramitacionreclamacionescicos.model.reclamacionescicos.validations.model.ConstantesValidacionesPosiblesRespuestas;
 import es.liberty.middleware.tramitacionreclamacionescicos.model.reclamacionescicos.validations.model.PreCondicionesPosiblesRespuestasModel;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.Calendar;
@@ -16,12 +17,12 @@ public class Validaciones {
     
     public static final Predicate<PreCondicionesPosiblesRespuestasModel> ULTIMO_MENSAJE_ES_EMITIDO_ES_EXCEPCION_POSIBLE_RESPUESTA = (preCondiciones) -> ConstantesValidacionesPosiblesRespuestas.listaPrecondicionExceptionEmision.contains(preCondiciones.getUltimoMensaje().getKey());
 
-    public static final Predicate<PreCondicionesPosiblesRespuestasModel> EXISTE_CONFIRMACION_DE_FRAUDE = (preCondiciones) -> preCondiciones.getDialogoCompletoReclamacion().contains(ConstantesValidacionesPosiblesRespuestas.codMensajeFraudeConfirmado);
+    public static final Predicate<PreCondicionesPosiblesRespuestasModel> EXISTE_CONFIRMACION_DE_FRAUDE = (preCondiciones) -> preCondiciones.getDialogoCompletoReclamacion().stream().anyMatch(e -> StringUtils.equalsIgnoreCase(e.getKey(), ConstantesValidacionesPosiblesRespuestas.codMensajeFraudeConfirmado));
 
     public static final Predicate<PreCondicionesPosiblesRespuestasModel> EXISTE_SOLICITUD_DE_ABONO_OFERTA_MOTIVADA_EN_MES_EN_CURSO = (preCondiciones) -> {
         Date fechaActual = new Date();
 
-        return (preCondiciones.getDialogoCompletoReclamacion().contains(ConstantesValidacionesPosiblesRespuestas.codMensajeAbonoOfertaMotivada) &&
+        return (preCondiciones.getDialogoCompletoReclamacion().stream().anyMatch(e -> StringUtils.equalsIgnoreCase(e.getKey(), ConstantesValidacionesPosiblesRespuestas.codMensajeAbonoOfertaMotivada)) &&
                     DateUtils.truncatedCompareTo(fechaActual, preCondiciones.getUltimoMensaje().getFechaRecepcion(), Calendar.MONTH) == 0);
     };
 
